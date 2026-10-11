@@ -20,7 +20,6 @@ export const useTasks = (initialFilters = {}) => {
       const data = await taskService.getTasks(filters);
       setTasks(data);
     } catch (err) {
-      console.error('Failed to load tasks:', err);
       setError(err.response?.data?.message || 'Could not fetch tasks');
     } finally {
       setLoading(false);
@@ -28,7 +27,11 @@ export const useTasks = (initialFilters = {}) => {
   }, [filters]);
 
   useEffect(() => {
-    fetchTasks();
+    const timer = setTimeout(() => {
+      fetchTasks();
+    }, 300);
+
+    return () => clearTimeout(timer);
   }, [fetchTasks]);
 
   const updateFilters = (newFilters) => {

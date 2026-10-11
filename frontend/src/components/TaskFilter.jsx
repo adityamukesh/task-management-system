@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TaskFilter = ({ filters, onFilterChange, onReset, isAdmin }) => {
+const TaskFilter = ({ filters, onFilterChange, onReset }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     onFilterChange({ [name]: value });
@@ -8,7 +8,7 @@ const TaskFilter = ({ filters, onFilterChange, onReset, isAdmin }) => {
 
   return (
     <div className="task-filter-bar">
-      <div className="filter-group search-group">
+      <div className="filter-group search-group" style={{ position: 'relative' }}>
         <input
           type="text"
           name="search"
@@ -16,7 +16,37 @@ const TaskFilter = ({ filters, onFilterChange, onReset, isAdmin }) => {
           value={filters.search}
           onChange={handleChange}
           className="form-input search-input"
+          style={{ paddingRight: filters.search ? '36px' : '14px' }}
         />
+        {filters.search && (
+          <button
+            type="button"
+            onClick={() => onFilterChange({ search: '' })}
+            style={{
+              position: 'absolute',
+              right: '10px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              background: '#e2e8f0',
+              border: 'none',
+              borderRadius: '50%',
+              width: '22px',
+              height: '22px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              color: '#475569',
+              fontSize: '12px',
+              fontWeight: 'bold',
+              lineHeight: 1
+            }}
+            title="Clear search text"
+            aria-label="Clear search"
+          >
+            ✕
+          </button>
+        )}
       </div>
 
       <div className="filter-controls">
