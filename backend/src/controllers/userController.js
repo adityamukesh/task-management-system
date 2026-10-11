@@ -22,9 +22,8 @@ const updateUserRole = async (req, res, next) => {
       return res.status(400).json({ message: 'Invalid role specified' });
     }
 
-    // Prevent administrator from demoting their own account
     if (req.user && req.user._id.toString() === req.params.id && role !== 'admin') {
-      return res.status(400).json({ message: 'Administrators cannot demote their own account' });
+      return res.status(400).json({ message: 'You cannot change your own admin role' });
     }
 
     const user = await User.findById(req.params.id);
