@@ -1,43 +1,47 @@
 const Task = require('../models/Task');
 
-// @desc    Get all tasks (with filters & search)
-// @route   GET /api/tasks
-// @access  Private (Admin & User)
 const getTasks = async (req, res, next) => {
   try {
-    const { status, priority, search, assignedTo } = req.query;
+    const { status, priority, search, assignedTo, view } = req.query;
 
     const query = {};
 
-    // Filter by status if provided
     if (status && status !== 'all') {
       query.status = status;
     }
 
-    // Filter by priority if provided
     if (priority && priority !== 'all') {
       query.priority = priority;
     }
 
-    // Filter by assigned user if provided
     if (assignedTo) {
       query.assignedTo = assignedTo;
     }
 
-    // Search by title or description
-    if (search) {
-      query.$or = [
-        { title: { $regex: search, $options: 'i' } },
-        { description: { $regex: search, $options: 'i' } },
-      ];
+    const conditions = [];
+
+    if (search && search.trim() !== '') {
+      conditions.push({
+        $or: [
+          { title: { $regex: search.trim(), $options: 'i' } },
+          { description: { $regex: search.trim(), $options: 'i' } }
+        ]
+      });
     }
 
-    // If regular user and not explicitly viewing all team tasks, show tasks assigned or created by them
-    if (req.user.role !== 'admin' && req.query.view === 'my-tasks') {
-      query.$or = [
-        { assignedTo: req.user._id },
-        { createdBy: req.user._id },
-      ];
+    if (view === 'my-tasks') {
+      conditions.push({
+        $or: [
+          { assignedTo: req.user._id },
+          { createdBy: req.user._id }
+        ]
+      });
+    }
+
+    if (conditions.length === 1) {
+      Object.assign(query, conditions[0]);
+    } else if (conditions.length > 1) {
+      query.$and = conditions;
     }
 
     const tasks = await Task.find(query)
@@ -51,9 +55,6 @@ const getTasks = async (req, res, next) => {
   }
 };
 
-// @desc    Get single task by ID
-// @route   GET /api/tasks/:id
-// @access  Private (Admin & User)
 const getTaskById = async (req, res, next) => {
   try {
     const task = await Task.findById(req.params.id)
@@ -70,9 +71,6 @@ const getTaskById = async (req, res, next) => {
   }
 };
 
-// @desc    Create a new task
-// @route   POST /api/tasks
-// @access  Private (Admin)
 const createTask = async (req, res, next) => {
   try {
     const { title, description, status, priority, dueDate, assignedTo } = req.body;
@@ -101,9 +99,6 @@ const createTask = async (req, res, next) => {
   }
 };
 
-// @desc    Update an existing task
-// @route   PUT /api/tasks/:id
-// @access  Private (Admin, or assigned User updating status)
 const updateTask = async (req, res, next) => {
   try {
     const task = await Task.findById(req.params.id);
@@ -112,7 +107,6 @@ const updateTask = async (req, res, next) => {
       return res.status(404).json({ message: 'Task not found' });
     }
 
-    // If user is not admin, they can only update status of task assigned to them
     if (req.user.role !== 'admin') {
       const isAssigned = task.assignedTo && task.assignedTo.toString() === req.user._id.toString();
       const isCreator = task.createdBy.toString() === req.user._id.toString();
@@ -121,7 +115,6 @@ const updateTask = async (req, res, next) => {
         return res.status(403).json({ message: 'Not authorized to update this task' });
       }
 
-      // Regular users can only update status
       if (req.body.status) {
         task.status = req.body.status;
       }
@@ -135,7 +128,6 @@ const updateTask = async (req, res, next) => {
       return res.json(updated);
     }
 
-    // Admin can update all fields
     const { title, description, status, priority, dueDate, assignedTo } = req.body;
 
     if (title !== undefined) task.title = title.trim();
@@ -157,9 +149,6 @@ const updateTask = async (req, res, next) => {
   }
 };
 
-// @desc    Delete a task
-// @route   DELETE /api/tasks/:id
-// @access  Private (Admin)
 const deleteTask = async (req, res, next) => {
   try {
     const task = await Task.findById(req.params.id);
@@ -176,9 +165,6 @@ const deleteTask = async (req, res, next) => {
   }
 };
 
-// @desc    Get dashboard task statistics
-// @route   GET /api/tasks/stats/summary
-// @access  Private
 const getTaskStats = async (req, res, next) => {
   try {
     const total = await Task.countDocuments();
