@@ -16,6 +16,7 @@ const TaskFilter = ({ filters, onFilterChange, onReset }) => {
           value={filters.search}
           onChange={handleChange}
           className="form-input search-input"
+          style={{ paddingRight: filters.search ? '36px' : '14px' }}
         />
         {filters.search && (
           <button
@@ -23,15 +24,24 @@ const TaskFilter = ({ filters, onFilterChange, onReset }) => {
             onClick={() => onFilterChange({ search: '' })}
             style={{
               position: 'absolute',
-              right: '12px',
+              right: '10px',
               top: '50%',
               transform: 'translateY(-50%)',
-              background: 'none',
+              background: '#e2e8f0',
               border: 'none',
+              borderRadius: '50%',
+              width: '22px',
+              height: '22px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               cursor: 'pointer',
-              color: '#64748b',
-              fontSize: '14px'
+              color: '#475569',
+              fontSize: '12px',
+              fontWeight: 'bold',
+              lineHeight: 1
             }}
+            title="Clear search text"
             aria-label="Clear search"
           >
             ✕
