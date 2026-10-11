@@ -1,16 +1,12 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
-// Helper to generate signed JWT
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: '30d',
   });
 };
 
-// @desc    Register a new user
-// @route   POST /api/auth/register
-// @access  Public
 const registerUser = async (req, res, next) => {
   try {
     const { name, email, password, role } = req.body;
@@ -28,7 +24,6 @@ const registerUser = async (req, res, next) => {
       return res.status(400).json({ message: 'User with this email already exists' });
     }
 
-    // Role defaults to 'user'. Only allow admin creation if specifically specified (e.g. initial setup)
     const assignedRole = role === 'admin' ? 'admin' : 'user';
 
     const user = await User.create({
@@ -54,9 +49,6 @@ const registerUser = async (req, res, next) => {
   }
 };
 
-// @desc    Authenticate user & get token
-// @route   POST /api/auth/login
-// @access  Public
 const loginUser = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -83,9 +75,6 @@ const loginUser = async (req, res, next) => {
   }
 };
 
-// @desc    Get current user profile
-// @route   GET /api/auth/me
-// @access  Private
 const getMe = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id).select('-password');

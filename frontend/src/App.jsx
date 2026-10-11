@@ -19,11 +19,11 @@ function App() {
           <Navbar />
           <main className="main-content">
             <Routes>
-              {/* Public routes */}
+              {}
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
 
-              {/* Protected user routes */}
+              {}
               <Route
                 path="/"
                 element={
@@ -57,7 +57,7 @@ function App() {
                 }
               />
 
-              {/* Admin-only routes */}
+              {}
               <Route
                 path="/admin/users"
                 element={
@@ -67,7 +67,7 @@ function App() {
                 }
               />
 
-              {/* Fallback 404 */}
+              {}
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </main>

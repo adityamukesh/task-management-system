@@ -40,7 +40,6 @@ a {
   text-decoration: none;
 }
 
-/* Layout */
 .app-layout {
   min-height: 100vh;
   display: flex;
@@ -55,7 +54,6 @@ a {
   padding: 2rem 1.5rem;
 }
 
-/* Navbar */
 .navbar {
   background-color: var(--bg-card);
   border-bottom: 1px solid var(--border);
@@ -163,7 +161,6 @@ a {
   color: var(--text-main);
 }
 
-/* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -243,7 +240,6 @@ a {
   background-color: #fee2e2;
 }
 
-/* Page headers */
 .page-header {
   display: flex;
   justify-content: space-between;
@@ -265,7 +261,6 @@ a {
   margin-top: 0.25rem;
 }
 
-/* Dashboard Hero */
 .dashboard-hero {
   display: flex;
   justify-content: space-between;
@@ -285,7 +280,6 @@ a {
   gap: 0.75rem;
 }
 
-/* Stats grid */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -329,7 +323,6 @@ a {
   color: var(--dark);
 }
 
-/* Tasks Grid & Cards */
 .tasks-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -477,7 +470,6 @@ a {
   text-decoration: underline;
 }
 
-/* Filters */
 .task-filter-bar {
   background-color: var(--bg-card);
   padding: 1.25rem;
@@ -512,7 +504,6 @@ a {
   text-transform: uppercase;
 }
 
-/* Forms & Inputs */
 .form-input,
 .form-select,
 .form-textarea {
@@ -564,7 +555,6 @@ a {
   flex: 1;
 }
 
-/* Modal */
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -617,7 +607,6 @@ a {
   border-top: 1px solid var(--border);
 }
 
-/* Auth Pages */
 .auth-page {
   min-height: 80vh;
   display: flex;
@@ -706,7 +695,6 @@ a {
   font-weight: 600;
 }
 
-/* Detail Page */
 .task-detail-page {
   max-width: 800px;
   margin: 0 auto;
@@ -820,7 +808,6 @@ a {
   flex-wrap: wrap;
 }
 
-/* Tables */
 .table-responsive {
   overflow-x: auto;
   background-color: var(--bg-card);
@@ -850,7 +837,6 @@ a {
   vertical-align: middle;
 }
 
-/* Utilities, Alerts & Loaders */
 .alert {
   padding: 0.85rem 1rem;
   border-radius: var(--radius-sm);
@@ -933,7 +919,6 @@ a {
   font-size: 0.8rem;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .mobile-menu-btn {
     display: block;

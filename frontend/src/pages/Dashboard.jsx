@@ -28,7 +28,7 @@ const Dashboard = () => {
         taskService.getTasks(),
       ]);
       setStats(statsData);
-      setRecentTasks(tasksData.slice(0, 6)); // Show latest 6 tasks
+      setRecentTasks(tasksData.slice(0, 6));
     } catch (err) {
       console.error('Failed to load dashboard data:', err);
     } finally {

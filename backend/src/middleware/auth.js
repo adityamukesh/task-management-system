@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
-// Verify JWT and attach current user to req
 const authenticateUser = async (req, res, next) => {
   let token;
 
@@ -30,7 +29,6 @@ const authenticateUser = async (req, res, next) => {
   }
 };
 
-// Check if authenticated user has admin role
 const requireAdmin = (req, res, next) => {
   if (req.user && req.user.role === 'admin') {
     next();

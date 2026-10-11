@@ -9,7 +9,6 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [authError, setAuthError] = useState(null);
 
-  // Initialize user state from localStorage or fetch profile
   useEffect(() => {
     const initAuth = async () => {
       const storedToken = localStorage.getItem('token');
@@ -18,7 +17,7 @@ export const AuthProvider = ({ children }) => {
       if (storedToken && storedUser) {
         try {
           setUser(JSON.parse(storedUser));
-          // Verify with backend
+
           const freshUser = await authService.getCurrentUser();
           setUser(freshUser);
           localStorage.setItem('user', JSON.stringify(freshUser));

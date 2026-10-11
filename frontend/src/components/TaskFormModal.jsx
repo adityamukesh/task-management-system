@@ -18,7 +18,7 @@ const TaskFormModal = ({ isOpen, onClose, onSubmit, initialTask = null }) => {
 
   useEffect(() => {
     if (isOpen) {
-      // Fetch users list for assignee dropdown
+
       const loadUsers = async () => {
         setLoadingUsers(true);
         try {
@@ -33,7 +33,6 @@ const TaskFormModal = ({ isOpen, onClose, onSubmit, initialTask = null }) => {
 
       loadUsers();
 
-      // Populate form if editing
       if (initialTask) {
         setFormData({
           title: initialTask.title || '',

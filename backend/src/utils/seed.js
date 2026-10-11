@@ -12,13 +12,11 @@ const seedData = async () => {
     await mongoose.connect(mongoUri);
     console.log('Connected to MongoDB for seeding...');
 
-    // Clear existing data
     await Task.deleteMany({});
     await User.deleteMany({});
 
     console.log('Cleared existing users and tasks.');
 
-    // Create users (pre-save hook hashes password)
     const adminUser = await User.create({
       name: 'System Admin',
       email: 'admin@taskflow.com',
@@ -45,7 +43,6 @@ const seedData = async () => {
     console.log(`- User 1: alex@taskflow.com (userpassword123)`);
     console.log(`- User 2: priya@taskflow.com (userpassword123)`);
 
-    // Create tasks
     const tasks = [
       {
         title: 'Design Database Schema for Taskflow',
