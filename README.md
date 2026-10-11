@@ -15,7 +15,7 @@
 
 | Role | Name | Roll Number | GitHub Profile |
 | :--- | :--- | :--- | :--- |
-| **Team Lead** | Aman Kumar (TL) | *[Roll No]* | [@amankumar](https://github.com/) |
+| **Team Lead** | AMAN KUMAR (TL) | *[Roll No]* | [@armnkumar321-spec](https://github.com/armnkumar321-spec) |
 | **Member 1** | *[Member Name]* | *[Roll No]* | [@member1](https://github.com/) |
 | **Member 2** | *[Member Name]* | *[Roll No]* | [@member2](https://github.com/) |
 | **Member 3** | *[Member Name]* | *[Roll No]* | [@member3](https://github.com/) |
@@ -27,7 +27,7 @@
 
 - **Frontend (Vercel)**: [https://task-management-system-frontend.vercel.app](https://task-management-system-frontend.vercel.app) *(Update with your live URL)*
 - **Backend API (Render / Railway)**: [https://task-management-system-backend.onrender.com](https://task-management-system-backend.onrender.com) *(Update with your live URL)*
-- **GitHub Repository**: [https://github.com/amankumar/task-management-system](https://github.com/amankumar/task-management-system)
+- **GitHub Repository**: [https://github.com/armnkumar321-spec/task-management-system](https://github.com/armnkumar321-spec/task-management-system)
 
 ---
 
